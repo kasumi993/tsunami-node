@@ -1,7 +1,7 @@
 {
   "scanStatus": "SUCCEEDED",
-  "scanStartTimestamp": "2022-10-25T19:42:09.328Z",
-  "scanDuration": "37.408s",
+  "scanStartTimestamp": "2022-10-26T17:41:34.533Z",
+  "scanDuration": "38.341s",
   "fullDetectionReports": {
   },
   "reconnaissanceReport": {
@@ -63,7 +63,7 @@
               "value": "139"
             }, {
               "key": "Date",
-              "value": "Tue, 25 Oct 2022 19:42:44 GMT"
+              "value": "Wed, 26 Oct 2022 17:42:10 GMT"
             }, {
               "key": "Connection",
               "value": "keep-alive"
