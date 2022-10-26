@@ -55,4 +55,7 @@ app.get('/get-scan-output', (req,res) => {
     res.status(200).send(scanOutput) 
 })
 
-app.listen(3030, () => console.log('server started'))
+
+const PORT = process.env.PORT || 3030;
+
+app.listen(PORT, () => console.log('server started'))
