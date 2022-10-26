@@ -1,80 +1,17 @@
 {
   "scanStatus": "SUCCEEDED",
-  "scanStartTimestamp": "2022-10-26T17:41:34.533Z",
-  "scanDuration": "38.341s",
+  "scanStartTimestamp": "2022-10-26T17:43:21.585Z",
+  "scanDuration": "3.136s",
   "fullDetectionReports": {
   },
   "reconnaissanceReport": {
     "targetInfo": {
       "networkEndpoints": [{
-        "type": "IP_HOSTNAME",
-        "ipAddress": {
-          "addressFamily": "IPV4",
-          "address": "127.0.0.1"
-        },
+        "type": "HOSTNAME",
         "hostname": {
-          "name": "localhost"
+          "name": "null"
         }
       }]
-    },
-    "networkServices": [{
-      "networkEndpoint": {
-        "type": "IP_HOSTNAME_PORT",
-        "ipAddress": {
-          "addressFamily": "IPV4",
-          "address": "127.0.0.1"
-        },
-        "port": {
-          "portNumber": 3030
-        },
-        "hostname": {
-          "name": "localhost"
-        }
-      },
-      "transportProtocol": "TCP",
-      "serviceName": "http",
-      "software": {
-        "name": "Node.js Express framework"
-      },
-      "serviceContext": {
-        "webServiceContext": {
-          "crawlResults": [{
-            "crawlTarget": {
-              "url": "http://localhost:3030/",
-              "httpMethod": "GET"
-            },
-            "responseCode": 404,
-            "contentType": "text/html; charset\u003dutf-8",
-            "content": "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9InV0Zi04Ij4KPHRpdGxlPkVycm9yPC90aXRsZT4KPC9oZWFkPgo8Ym9keT4KPHByZT5DYW5ub3QgR0VUIC88L3ByZT4KPC9ib2R5Pgo8L2h0bWw+Cg==",
-            "responseHeaders": [{
-              "key": "X-Powered-By",
-              "value": "Express"
-            }, {
-              "key": "Content-Security-Policy",
-              "value": "default-src \u0027none\u0027"
-            }, {
-              "key": "X-Content-Type-Options",
-              "value": "nosniff"
-            }, {
-              "key": "Content-Type",
-              "value": "text/html; charset\u003dutf-8"
-            }, {
-              "key": "Content-Length",
-              "value": "139"
-            }, {
-              "key": "Date",
-              "value": "Wed, 26 Oct 2022 17:42:10 GMT"
-            }, {
-              "key": "Connection",
-              "value": "keep-alive"
-            }, {
-              "key": "Keep-Alive",
-              "value": "timeout\u003d5"
-            }]
-          }]
-        }
-      },
-      "cpes": ["cpe:/a:nodejs:node.js"]
-    }]
+    }
   }
 }
