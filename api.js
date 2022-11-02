@@ -9,16 +9,14 @@ require.extensions['.txt'] = function (module, filename) {
     module.exports = fs.readFileSync(filename, 'utf8');
 };
 
-// function setHeaders(req, res, next) {
-//     res.set({
-//         'cache-control' : 'max-age=0, no-cache, no-store',
-//         'expires': 0,
-//         'pragma': 'no-cache'
-//     })
-//     next();
-// }
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
-// app.use(setHeaders);
 
 const { exec } = require("child_process");
 
