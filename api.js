@@ -1,28 +1,41 @@
 // java -cp "tsunami-main-0.0.15-SNAPSHOT-cli.jar:plugins/*" -Dtsunami.config.location=tsunami.yaml com.google.tsunami.main.cli.TsunamiCli --ip-v4-target=127.0.0.1 --scan-results-local-output-format=JSON --scan-results-local-output-filename=tmp/tsunami-result.json &> tmp/stdout.txt
 
+
 const express = require('express')
 const app = express()
+const cors = require('cors')
 
 var fs = require('fs');
 
-require.extensions['.txt'] = function (module, filename) {
+require.extensions['.log'] = function (module, filename) {
     module.exports = fs.readFileSync(filename, 'utf8');
 };
 
-app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
+const corsOpts = {
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+    ],
+  
+    allowedHeaders: [
+      'Content-Type',
+    ],
+  };
+  
+  app.use(cors(corsOpts));
 
 
 const { exec } = require("child_process");
 
 app.get('/scan/:url', (req,res) => { 
     const hostname = req.params.url;
-    const launchTsunami = exec(`java -cp 'tsunami-main-0.0.15-SNAPSHOT-cli.jar:plugins/*' -Dtsunami.config.location=tsunami.yaml com.google.tsunami.main.cli.TsunamiCli  --hostname-target='${hostname}' --scan-results-local-output-format=JSON --scan-results-local-output-filename=tmp/tsunami-result.json &> tmp/stdout.txt`);
+    const logging = fs.createWriteStream('tmp/stdout.log', { flags: 'a' });
+    const launchTsunami = exec(`java -cp 'tsunami-main-0.0.15-SNAPSHOT-cli.jar:plugins/*' -Dtsunami.config.location=tsunami.yaml com.google.tsunami.main.cli.TsunamiCli  --hostname-target='${hostname}' --scan-results-local-output-format=JSON --scan-results-local-output-filename=tmp/tsunami-result.json`);
+    launchTsunami.stdout.pipe(logging);
+    launchTsunami.stderr.pipe(logging);
+
     launchTsunami.stdout.on("data", data => {
         console.log(`stdout: ${data}`);
         res.write(`<span>stdout:</span> ${data}`);
@@ -49,8 +62,8 @@ app.get('/get-scan-result', (req,res) => {
     res.status(200).json(scanResult) 
 })
 app.get('/get-scan-output', (req,res) => { 
-    const scanOutput = require('./tmp/stdout.txt')
-    res.status(200).send(scanOutput) 
+    const scanOutput = require('./tmp/stdout.log')
+    res.status(200).json(scanOutput) 
 })
 
 
